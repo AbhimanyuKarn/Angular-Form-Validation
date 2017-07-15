@@ -1,0 +1,87 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+<title>Angular Assignment </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link href="main.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <script src ="main.js"></script>
+  </head>
+  <body>
+  <div ng-app="validationApp" ng-controller="mainController">
+<div class="container">
+<div class="row">  
+   
+<div class="col-sm-6">
+    <!-- FORM ============ -->
+  
+    <form name="userForm" ng-submit="submitForm()" novalidate>
+
+        <!-- NAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+            <label>Full Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Optional" ng-model="user.name" required>
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block"></p>
+        </div>
+      
+        <!-- USERNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" ng-model="user.username" ng-minlength="3" ng-maxlength="8">
+            <p ng-show="userForm.username.$error.minlength" class="help-block"></p>
+            <p ng-show="userForm.username.$error.maxlength" class="help-block"></p>
+        </div>
+        
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="user.email">
+            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block"></p>
+        </div>
+        <!--Password-->
+        <div ng-app="validationApp" ng-controller="PasswordCtrl" ng-submit="submitForm()">
+         <div class="form-group" ng-class="{ 'has-error' : isInputInvalid(form.password),'has-success':isInputValid(form.password)}">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" ng-model="user.password">
+            <div class="progress" style="margin-top:10px">
+            <div class="progress-bar"
+            aria-valuenow="{{passwordStrength}}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            style="width:{{passwordStrength}}">
+        </div>
+        </div>
+        </div>
+
+        
+        <button ng-disabled="form.$invalid" class="btn">Submit</button>
+        
+    </form>
+  </div>
+  <table style="width:100%">
+  <tr>
+    <th>User</th>
+    <th>Input</th> 
+  </tr>
+  <tr>
+    <td>FullName</td>
+    <td>{{ valid_user.name }}    </td>
+    </tr>
+    <tr>
+    <td>UserName</td>
+    <td> {{ valid_user.username }}  </td>
+    </tr>
+    <tr>
+    <td>Email</td>
+     <td> {{ valid_user.email }} </td>
+     </tr>
+     
+</table>
+
+
+  </body>
