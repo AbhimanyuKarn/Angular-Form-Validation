@@ -42,15 +42,16 @@ app.factory('Password', function() {
 	// create angular controller
 	app.controller('mainController', function($scope) {
 
-		// function to submit the form after all validation has occurred			
+		// function to submit the form after all validation has occurred
+		$scope.entries = [];			
 		$scope.submitForm = function() {
 
 			
-
 			var valid_user = $scope.user
 			$scope.valid_user = valid_user
 
-			
+			$scope.entries.push({ 'fullName':$scope.valid_user.name, 'userName': $scope.valid_user.username, 'email':$scope.valid_user.email });
+			console.log($scope.entries);
 
 		};
 
@@ -61,6 +62,7 @@ app.factory('Password', function() {
 
 	 app.controller('PasswordCtrl' ,function($scope, Password) {
 	 	$scope.user = {}
+
 		$scope.$watch("user.password", function(pass) {
 			$scope.passwordStrength = Password.getStrength(pass) * 6.75;
 			 if($scope.passwordStrength < 8) {
